@@ -1,11 +1,30 @@
-<!-- These buttons remain in the list component to control the state -->
-<button (click)="handleButton1Click()">Spaghetti Carbonara</button>
-<button (click)="handleButton2Click()">Caprese Salad</button>
+<!-- Add a search input field -->
+<div class="search-container">
+  <input 
+    class="search-input"
+    [ngModel]="searchTerm()" 
+    (ngModelChange)="searchTerm.set($event)" 
+    placeholder="Search for a recipe..."
+  />
+</div>
+
+
+<!-- The @for loop now iterates over the `filteredRecipes` computed signal -->
+@for (recipe of filteredRecipes(); track recipe.id) {
+  <!-- The rest of the template remains the same -->
+  <button (click)="selectRecipe(recipe)">
+    {{ recipe.name }}
+    @if (recipe.isFavorite) {
+      <span> ★</span>
+    }
+  </button>
+}
+
+<!-- Add a message for when no recipes are found -->
+@if (filteredRecipes().length === 0) {
+  <p class="no-results">No recipes found. Try a different search term!</p>
+}
 
 <hr>
 
-<!--
-  3. Use the new child component in the template.
-  We are binding the parent's 'recipe' signal to the child's 'recipe' input.
--->
 <app-recipe-detail [recipe]="recipe()" />
