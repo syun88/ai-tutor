@@ -5,15 +5,25 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.dev/license
  */
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import { Component } from '@angular/core';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrl: './app.css'
 })
 export class App {
-  protected title = 'myapp';
+  protected readonly title = signal('My Recipe Box');
+
+  // ↓↓↓ メソッドをここに移動します ↓↓↓
+  protected handleButton1Click(): void {
+    console.log('ボタン1がクリックされました！');
+  }
+
+  protected handleButton2Click(): void {
+    console.log('ボタン2がクリックされました！');
+  }
 }
