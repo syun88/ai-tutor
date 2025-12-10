@@ -1,12 +1,7 @@
-/*!
- * @license
- * Copyright 2025 Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.dev/license
- */
-import { Component } from '@angular/core';
-import { signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
+// ↓↓↓ RecipeModel もインポートします
+import { RecipeModel } from './models';
+import { MOCK_RECIPES } from './mock-recipes';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +11,17 @@ import { signal } from '@angular/core';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('My Recipe Box');
+  // protected readonly title = signal('My Recipe Box'); // ← これはもう不要
 
-  // ↓↓↓ メソッドをここに移動します ↓↓↓
+  // ↓↓↓ 新しい recipe シグナルをここに追加します
+  protected readonly recipe = signal<RecipeModel>(MOCK_RECIPES[0]);
+
+  // ↓↓↓ クリックハンドラの中身を .set() を使うように書き換えます
   protected handleButton1Click(): void {
-    console.log('ボタン1がクリックされました！');
+    this.recipe.set(MOCK_RECIPES[0]); // 1番目のレシピをセット
   }
 
   protected handleButton2Click(): void {
-    console.log('ボタン2がクリックされました！');
+    this.recipe.set(MOCK_RECIPES[1]); // 2番目のレシピをセット
   }
 }
