@@ -1,1 +1,11 @@
-<p>recipe-list works!</p>
+<!-- These buttons remain in the list component to control the state -->
+<button (click)="handleButton1Click()">Spaghetti Carbonara</button>
+<button (click)="handleButton2Click()">Caprese Salad</button>
+
+<hr>
+
+<!--
+  3. Use the new child component in the template.
+  We are binding the parent's 'recipe' signal to the child's 'recipe' input.
+-->
+<app-recipe-detail [recipe]="recipe()" />

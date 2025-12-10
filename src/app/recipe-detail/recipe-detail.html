@@ -1,0 +1,26 @@
+<!-- First, check if the recipe input has data before trying to display it -->
+@if (recipe()) {
+  <!-- Image display (will be broken in this environment, but the code is correct) -->
+  <img [src]="recipe().imgUrl" [alt]="recipe().name">
+
+  <!-- Title and Description -->
+  <h1>{{ recipe().name }}</h1>
+  <p>{{ recipe().description }}</p>
+
+  <hr>
+
+  <!-- Servings adjuster -->
+  <div>
+    <p>Servings: {{ servings() }}</p>
+    <button (click)="decrementServings()">-</button>
+    <button (click)="incrementServings()">+</button>
+  </div>
+
+  <hr>
+
+  <!-- Adjusted Ingredients list -->
+  <h3>Adjusted Ingredients (Raw Data):</h3>
+  <pre>{{ adjustedIngredients() | json }}</pre>
+} @else {
+  <p>Please select a recipe.</p>
+}
