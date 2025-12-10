@@ -1,0 +1,69 @@
+/*
+  Main container for the recipe card.
+  This uses Flexbox to create a two-column layout (image and content).
+*/
+.recipe-card {
+  display: flex; /* LAYOUT: Use Flexbox */
+  border: 1px solid #ccc; /* Add a subtle border */
+  border-radius: 8px; /* Softer, rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a gentle shadow for depth */
+  max-width: 600px; /* Prevent the card from becoming too wide */
+  overflow: hidden; /* Ensures the child rounded corners are visible */
+  margin: 1rem auto; /* Center the card on the page with some space */
+}
+
+/* Container for the image */
+.recipe-image-container {
+  flex: 0 0 200px; /* LAYOUT: Fixed width for the image column */
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+/* Container for all the text content */
+.recipe-content {
+  display: flex; /* LAYOUT: Use Flexbox for the inner content too */
+  flex-direction: column; /* Stack the content vertically */
+  padding: 1.5rem; /* WHITESPACE: Add generous padding inside the content area */
+  flex: 1; /* LAYOUT: Allow this column to take up the remaining space */
+}
+
+.recipe-header h1 {
+  /* HIERARCHY: Make the title large and bold */
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0; /* Remove default browser margin */
+}
+
+.recipe-description {
+  /* HIERARCHY: Subtler text for the description */
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem; /* WHITESPACE: A little space below the title */
+}
+
+/* Section for servings control */
+.servings-control {
+  margin-top: 1.5rem; /* WHITESPACE: Space above the servings section */
+  border-top: 1px solid #eee; /* Visual separator */
+  padding-top: 1.5rem; /* WHITESPACE: Space below the separator */
+}
+
+.servings-control p {
+  margin: 0;
+  font-weight: 600; /* HIERARCHY: Make servings label slightly bolder */
+}
+
+.servings-buttons {
+  margin-top: 0.5rem;
+}
+
+/* We will style the ingredients list properly in the next module */
+.ingredients-section {
+  margin-top: 1.5rem;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}

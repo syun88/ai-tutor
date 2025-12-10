@@ -1,26 +1,50 @@
-<!-- First, check if the recipe input has data before trying to display it -->
+<!-- Check if recipe data exists -->
 @if (recipe()) {
-  <!-- Image display (will be broken in this environment, but the code is correct) -->
-  <img [src]="recipe().imgUrl" [alt]="recipe().name">
+  <!-- This is the main container we will style -->
+  <div class="recipe-card">
+    
+    <!-- Image Section -->
+    <div class="recipe-image-container">
+      <img [src]="recipe().imgUrl" [alt]="recipe().name" class="recipe-image">
+    </div>
 
-  <!-- Title and Description -->
-  <h1>{{ recipe().name }}</h1>
-  <p>{{ recipe().description }}</p>
+    <!-- Content Section -->
+    <div class="recipe-content">
+      
+      <!-- Header: Title & Description -->
+      <div class="recipe-header">
+        <h1>{{ recipe().name }}</h1>
+        <p class="recipe-description">{{ recipe().description }}</p>
+      </div>
 
-  <hr>
+      <!-- Servings Adjuster -->
+      <div class="servings-control">
+        <p>Servings: {{ servings() }}</p>
+        <div class="servings-buttons">
+          <button (click)="decrementServings()">-</button>
+          <button (click)="incrementServings()">+</button>
+        </div>
+      </div>
 
-  <!-- Servings adjuster -->
-  <div>
-    <p>Servings: {{ servings() }}</p>
-    <button (click)="decrementServings()">-</button>
-    <button (click)="incrementServings()">+</button>
+      <!-- Ingredients List -->
+      <div class="ingredients-section">
+        <h3>Ingredients</h3>
+        <ul>
+          <!-- Use @for to loop over the ingredients -->
+          <!-- 'track ingredient.name' is used for performance optimization -->
+          @for (ingredient of adjustedIngredients(); track ingredient.name) {
+            <li>
+              {{ ingredient.name }}: {{ ingredient.quantity }} {{ ingredient.unit }}
+            </li>
+          } @empty {
+            <!-- This content is shown if the list is empty -->
+            <li>No ingredients listed for this recipe.</li>
+          }
+        </ul>
+      </div>
+
+    </div>
   </div>
-
-  <hr>
-
-  <!-- Adjusted Ingredients list -->
-  <h3>Adjusted Ingredients (Raw Data):</h3>
-  <pre>{{ adjustedIngredients() | json }}</pre>
 } @else {
   <p>Please select a recipe.</p>
 }

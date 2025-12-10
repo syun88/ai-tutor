@@ -1,4 +1,3 @@
-
 import { RecipeModel } from './models';
 
 export const MOCK_RECIPES: RecipeModel[] = [
@@ -6,7 +5,9 @@ export const MOCK_RECIPES: RecipeModel[] = [
     id: 1,
     name: 'Spaghetti Carbonara',
     description: 'A classic Italian pasta dish.',
-    imgUrl: 'https://via.placeholder.com/300x200.png?text=Spaghetti+Carbonara',
+    // This URL is from Wikimedia Commons and should display correctly.
+    imgUrl: 'https://www.allrecipes.com/thmb/zJzTLhtUWknHXVoFIzysljJ9wR8=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg',
+    isFavorite: true, 
     ingredients: [
       { name: 'Spaghetti', quantity: 200, unit: 'g' },
       { name: 'Guanciale', quantity: 100, unit: 'g' },
@@ -19,7 +20,9 @@ export const MOCK_RECIPES: RecipeModel[] = [
     id: 2,
     name: 'Caprese Salad',
     description: 'A simple and refreshing Italian salad.',
-    imgUrl: 'https://via.placeholder.com/300x200.png?text=Caprese+Salad',
+    // This URL is also from Wikimedia Commons.
+    imgUrl: 'https://images.immediate.co.uk/production/volatile/sites/30/2014/05/Epic-summer-salad-hub-2646e6e.jpg?quality=90&webp=true&resize=800,726g',
+    isFavorite: false, 
     ingredients: [
       { name: 'Tomatoes', quantity: 4, unit: 'each' },
       { name: 'Fresh Mozzarella', quantity: 200, unit: 'g' },

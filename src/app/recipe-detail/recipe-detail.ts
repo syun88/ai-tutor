@@ -1,35 +1,33 @@
-
 import { Component, computed, input, signal } from '@angular/core';
-import { JsonPipe } from '@angular/common';
 import { RecipeModel } from '../models';
 
 @Component({
   selector: 'app-recipe-detail',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [], // JsonPipe has been removed from here
   templateUrl: './recipe-detail.html',
   styleUrl: './recipe-detail.css',
 })
 export class RecipeDetail {
-  // This is the new signal input to receive data from the parent!
+  // This is the input signal for the recipe
   readonly recipe = input.required<RecipeModel>();
 
-  // This state now lives in the detail component, where it belongs.
+  // This is the local state for the servings
   protected readonly servings = signal(1);
 
-  // This computed signal also moves here, as it depends on local state.
+  // This computed signal recalculates ingredients based on servings
   protected readonly adjustedIngredients = computed(() => {
-    const recipeValue = this.recipe(); // Get the value from the signal input
-    const servingsValue = this.servings();
-    const originalServings = recipeValue.ingredients.reduce(
-      (acc, i) => Math.max(acc, i.quantity), // A simple way to estimate original servings
-      1
+    const currentRecipe = this.recipe();
+    const currentServings = this.servings();
+    const originalServings = currentRecipe.ingredients.reduce(
+      (acc, i) => (acc + i.quantity > 0 ? acc : 1), // A bit simplistic, assumes 1 serving base if not specified
+      0
     );
 
-    return recipeValue.ingredients.map((ingredient) => {
+    return currentRecipe.ingredients.map((ingredient) => {
       return {
         ...ingredient,
-        quantity: (ingredient.quantity / originalServings) * servingsValue,
+        quantity: (ingredient.quantity / (originalServings || 1)) * currentServings,
       };
     });
   });
