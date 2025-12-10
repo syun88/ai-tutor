@@ -24,4 +24,19 @@ export class App {
   protected handleButton2Click(): void {
     this.recipe.set(MOCK_RECIPES[1]); // 2番目のレシピをセット
   }
+  protected readonly servings = signal<number>(1);
+
+  // handleButton2Click メソッドの下に、以下の2つのメソッドを追加します
+
+  protected incrementServings(): void {
+    // servings シグナルを更新します
+    this.servings.update(currentValue => currentValue + 1);
+  }
+
+  protected decrementServings(): void {
+    // 1未満にならないようにチェックします
+    if (this.servings() > 1) {
+      this.servings.update(currentValue => currentValue - 1);
+    }
+  }
 }

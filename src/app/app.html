@@ -1,7 +1,15 @@
-<!-- title() の代わりに recipe() のプロパティを表示します -->
 <h1>{{ recipe().name }}</h1>
 <p>{{ recipe().description }}</p>
 
-<!-- ボタンはそのままです -->
+<!-- レシピを切り替えるボタン (これはそのまま) -->
 <button (click)="handleButton1Click()">Spaghetti Carbonara</button>
 <button (click)="handleButton2Click()">Caprese Salad</button>
+
+<hr> <!-- 見やすくするために区切り線を追加 -->
+
+<!-- ↓↓↓ 新しい分量表示とボタンをここに追加します ↓↓↓ -->
+<div>
+  <p>Servings: {{ servings() }}</p>
+  <button (click)="decrementServings()">-</button>
+  <button (click)="incrementServings()">+</button>
+</div>
